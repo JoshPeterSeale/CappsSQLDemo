@@ -1,0 +1,34 @@
+services:
+    cappsSQL:
+      image: capps-db:test
+      container_name: capps-sql
+      ports:
+        - 5432:5432
+      networks:
+        - capps-network
+      volumes:
+        - capps-data:/var/lib/postgresql/data
+    
+    nifi:
+      image: apache/nifi:1.27.0
+      container_name: nifi
+      ports:
+        - 8443:8443
+      networks:
+        - capps-network
+      environment:
+        - NIFI_HOME=/opt/nifi/nifi-current
+        - SINGLE_USER_CREDENTIALS_USERNAME=admin
+        - SINGLE_USER_CREDENTIALS_PASSWORD=admin_password
+      volumes:
+        - ./nifi/mounts/files:/opt/nifi/nifi-current/files
+        - ./nifi/mounts/java:/usr/share/java/
+
+
+volumes:
+  capps-data:
+    name: capps-data
+
+networks:
+  capps-network:
+    name: capps-network
