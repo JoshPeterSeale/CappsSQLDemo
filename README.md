@@ -5,6 +5,9 @@ This repository contains the code required to spin up a postgreSQL and nifi dock
 ## Pre-requisites:
 
 - Ensure docker is installed
+- Build the postgresql database image using docker:
+`cd db`
+`sudo docker build . -t capps-db:test`
 - In the same directory as the docker-compose.yml file run the following line of code to spin up the two docker containers:
 `sudo docker compose up -d`
 
