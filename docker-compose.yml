@@ -21,6 +21,11 @@ services:
         - SINGLE_USER_CREDENTIALS_USERNAME=admin
         - SINGLE_USER_CREDENTIALS_PASSWORD=admin_password
       volumes:
+        - nifi-data:/opt/nifi/nifi-current/conf
+        - nifi-data:/opt/nifi/nifi-current/database_repository
+        - nifi-data:/opt/nifi/nifi-current/flowfile_repository
+        - nifi-data:/opt/nifi/nifi-current/content_repository
+        - nifi-data:/opt/nifi/nifi-current/provenance_repository
         - ./nifi/mounts/files:/opt/nifi/nifi-current/files
         - ./nifi/mounts/java:/usr/share/java/
 
@@ -28,6 +33,8 @@ services:
 volumes:
   capps-data:
     name: capps-data
+  nifi-data:
+    name: nifi-data
 
 networks:
   capps-network:
